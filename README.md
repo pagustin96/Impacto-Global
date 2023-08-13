@@ -1,2 +1,2 @@
 # Impacto-Global
-Modulo de CRUD para gestion de recursos humanos
+Modulo CRUD para gestion de recursos humanos
