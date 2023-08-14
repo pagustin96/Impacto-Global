@@ -1,0 +1,120 @@
+.candidatos-container{
+    display: flex;
+    flex-flow: column;
+}
+
+.candidatos-table-container{
+    display: flex;
+    margin: 2% 10% 5px 10%;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilos generales para la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse; /* Fusiona los bordes de las celdas */
+    margin-top: 20px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+  
+  /* Estilos para las celdas del encabezado de la tabla */
+  th {
+    
+    padding: 10px;
+    text-align: center;
+  }
+  
+  /* Estilos para las celdas de datos de la tabla */
+  td {
+    
+    text-align: center;
+  }
+  
+  /* Estilos para las filas pares de la tabla */
+  tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+  
+  /* Estilos para los botones dentro de las celdas de la tabla */
+  td button {
+    padding: 5px 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    margin-right: 5px;
+    width: 100px;
+  }
+  
+  /* Estilos para los botones "MODIFICAR" y "ELIMINAR" */
+  button.modify {
+    background-color: #17a2b8;
+    border-radius: 5px;
+    transition: .3s ease all;
+  }
+
+  button.modify:hover{
+    background-color: #007bff
+  }
+  
+  button.delete {
+    background-color: #dc3545;
+    border-radius: 5px;
+    transition: .3s ease all;
+  }
+
+  button.delete:hover{
+    background-color: red;
+  }
+  
+  .add-new-candidato{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: .3s ease all;
+    background-color: #dc3545;
+    cursor: pointer;
+    color: white;
+    width: 100px;
+    height: 40px;
+    font-weight: 500;
+    font-size: 16px;
+    padding: 0px;
+    border-radius: 5px;
+  }
+
+  .add-new-candidato:hover{
+    background-color: red
+  }
+
+  .addNew-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .busqueda-container{
+    margin-left: 10%;
+    margin-right: 10%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .busqueda-container label{
+    font-weight: 700;
+    margin-right: 5px;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  }
+
+  .busqueda-container button{
+    width: 100px;
+    background-color: #17a2b8;
+    color: white;
+    transition: .3s ease all;
+    border-radius: 5px;
+  }
+
+  .busqueda-container button:hover{
+    background-color: #007bff
+  }
