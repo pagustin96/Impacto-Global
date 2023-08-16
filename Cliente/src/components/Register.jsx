@@ -9,7 +9,6 @@ export const Register = () => {
         contraseña:'',
         nombre:'',
         apellido:'',
-        dni: '39498001'
     })
     //const [data, setData] = useState('')
 
@@ -17,7 +16,7 @@ export const Register = () => {
         // Llamada a la API en localhost:8081
         e.preventDefault()
         try{
-            const response = await fetch(`http://localhost:8081/usuario/register`,{ 
+            const response = await fetch(`http://localhost:8080/api/user/register`,{ 
                 method: 'POST',
                 headers: {
                   'Content-Type': 'application/json',

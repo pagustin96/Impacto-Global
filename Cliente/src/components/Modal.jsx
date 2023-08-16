@@ -77,7 +77,7 @@ export const Modal = ({estado, setEstado, selectedCandidate, setSelectedCandidat
     
     const handleModify = () =>{
 
-      fetch(`http://localhost:8081/candidatos/update/${formData.id}`, { 
+      fetch(`http://localhost:8080/api/candidatos/${formData.id}`, { 
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -100,7 +100,7 @@ export const Modal = ({estado, setEstado, selectedCandidate, setSelectedCandidat
           cliente: '',
           perfil:'',
           seniority:'',
-          ningles:'',
+          ingles:'',
           rate:'',
           estado:'',
           contratado:'',
@@ -113,12 +113,15 @@ export const Modal = ({estado, setEstado, selectedCandidate, setSelectedCandidat
         event.preventDefault();
         // Aquí puedes enviar los datos del formulario a través de una llamada a la API o hacer lo que necesites con ellos.
         // Realizar la solicitud POST con fetch
-    fetch('http://localhost:8081/candidatos/add', {
+        // Elimina la propiedad 'id' del objeto formData
+    const { id, ...formDataWithoutId } = formData;
+
+    fetch('http://localhost:8080/api/candidatos', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify(formDataWithoutId),
       })
         .then((response) => response.json())
         .then((data) => {
@@ -135,13 +138,13 @@ export const Modal = ({estado, setEstado, selectedCandidate, setSelectedCandidat
         // Limpia el formulario después del envío
         
         setFormData({
-          id:'',
+          id: '',
           nombre: '',
           apellido: '',
           cliente: '',
           perfil:'',
           seniority:'',
-          ningles:'',
+          ingles:'',
           rate:'',
           estado:'',
           contratado:'',
@@ -233,9 +236,9 @@ export const Modal = ({estado, setEstado, selectedCandidate, setSelectedCandidat
                           <input
                           placeholder='Ingles...'
                           type="text"
-                          id="ningles"
-                          name="ningles"
-                          value={formData.ningles}
+                          id="ingles"
+                          name="ingles"
+                          value={formData.ingles}
                           onChange={handleChange}
                           required
                           />

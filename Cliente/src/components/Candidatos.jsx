@@ -32,7 +32,7 @@ export const Candidatos = () => {
 
     const handleAll = () => {
         // Llamada a la API en localhost:8081
-        fetch('http://localhost:8081/candidatos/all')
+        fetch('http://localhost:8080/api/candidatos')
         .then((response) => response.json())
         .then(res =>  setData(res))
         .catch(error => {
