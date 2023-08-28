@@ -43,28 +43,28 @@ export const Register = () => {
 
   return (
     <div className='container-register'>
-        <img className='img-ar' src='/img/img_logos_arcons/ar-it-service-logo-01.png' alt='logoarcons'/>
-        <div className='form-container'>
+        <img className='img-ar' src='/img/img_logos_arcons/1.png' alt='logoarcons'/>
+        <div className='form-container-register'>
             <form action='submit' onSubmit={getUser}>
                 <div className='iniSes-container'>Registrarse</div>
                 <div className='email-container'>
                     <label htmlFor="email">Email</label>
-                    <input type="email" id='email' name='email' placeholder='Ingresa tu mail...' onChange={handleChange} value={loginData.email}/>
+                    <input type="email" id='email' name='email' placeholder='Ingresa tu mail...' required onChange={handleChange} value={loginData.email}/>
                 </div>
                 <div className='password-container'>
                     <label htmlFor="password">Contraseña</label>
-                    <input type="password" id='contraseña' name='contraseña' placeholder='Ingresa tu contraseña' onChange={handleChange} value={loginData.contraseña}/>
+                    <input type="password" id='contraseña' name='contraseña' placeholder='Ingresa tu contraseña' required onChange={handleChange} value={loginData.contraseña}/>
                 </div>
                 <div className='password-container'>
                     <label htmlFor="name">Nombre</label>
-                    <input type="text" id='nombre' name='nombre' placeholder='Ingresa tu nombre...' onChange={handleChange} value={loginData.nombre}/>
+                    <input type="text" id='nombre' name='nombre' placeholder='Ingresa tu nombre...' required onChange={handleChange} value={loginData.nombre}/>
                 </div>
                 <div className='password-container'>
                     <label htmlFor="apellido">Apellido</label>
-                    <input type="text" id='apellido' name='apellido' placeholder='Ingresa tu apellido...' onChange={handleChange} value={loginData.apellido}/>
+                    <input type="text" id='apellido' name='apellido' placeholder='Ingresa tu apellido...' required onChange={handleChange} value={loginData.apellido}/>
                 </div>
-                <button type="submit" className='iniSes-btn'>REGISTRARSE</button>
-                <NavLink to={'/login'}><button type="submit" className='forgetpsw-btn' >YA TIENES UNA CUENTA?</button></NavLink>
+                <button type="submit" className='register-btn'>REGISTRARSE</button>
+                <NavLink to={'/login'}><button type="submit" className='red-login-btn' >YA TIENES UNA CUENTA?</button></NavLink>
             </form>
         </div>
     </div>

@@ -13,7 +13,7 @@ export const Navbar = () => {
   return (
     <nav className='navbar-container'>
         <div className='titulo-container'>
-          <img className='img-navbar' src='/img/img_logos_arcons/ar-it-service-logo-01.png' alt='logoarcons'/>
+          <img className='img-navbar' src='/img/img_logos_arcons/11.png' alt='logoarcons'/>
         </div>
         <div className='sections-container'>
 

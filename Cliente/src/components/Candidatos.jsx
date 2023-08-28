@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react'
+import { useNavigate } from 'react-router-dom'
 import '../styles/candidatos.css'
 import { Modal } from './Modal';
+import axios from 'axios'
 
 export const Candidatos = () => {
     const [render, setRender] = useState(false)
@@ -10,6 +12,8 @@ export const Candidatos = () => {
     const [modificar, setModificar] = useState(false)
     const [deleteUser, setDeleteUser] = useState(false)
     const [searchId, setSearchId] = useState('')
+
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -21,8 +25,18 @@ export const Candidatos = () => {
         }  
 
       handleAll()
+
+      handleToken()
       
       }, [estado, deleteUser, render]);
+
+    const handleToken = () => {
+       
+        if(data && data.error === 'Necesitas incluir el access_token en la cookie'){
+            alert('SU SESION A EXPIRADO!')
+            navigate('/login')
+        }
+    }  
 
     const modificarCandidato= (item)=> {
         setSelectedCandidate(item)
@@ -30,32 +44,26 @@ export const Candidatos = () => {
         setModificar(true)
     }
 
-    const handleAll = () => {
+    const handleAll =async () => {
         // Llamada a la API en localhost:8081
-        fetch('http://localhost:8080/api/candidatos')
-        .then((response) => response.json())
-        .then(res =>  setData(res))
-        .catch(error => {
-        console.error('Error al obtener los datos:', error);
-        });      
+        try {
+            const response = await axios.get('http://localhost:8080/api/candidatos',{withCredentials: true})
+            setData(response.data)
+            console.log(response)
+        } catch (error){
+            console.log(error)
+        }
+    };      
         
-    }
+
    
-    const handleDelete = (id) =>{
+    const handleDelete = async (id) =>{
         
-        fetch(`http://localhost:8081/candidatos/delete/${id}`, { //cambiar id por nombre
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
-          .then((data) => {
-            // Aquí puedes hacer algo con la respuesta del servidor si lo deseas
-            console.log('Respuesta del servidor:', data);
-          })
-          .catch((error) => {
-            console.error('Error al enviar los datos:', error);
-          });
+        try{
+            const response = await axios.delete('http://localhost:8080/api/candidatos',{withCredentials: true})
+        } catch(error){
+            console.log('Error al enviar los datos:', error)
+        };
           setDeleteUser(true)
       }
 
@@ -75,26 +83,18 @@ export const Candidatos = () => {
         }
     }
 
-    const handleSearch =(e) => {
+    const handleSearch =async(e) => {
         //e.preventDefault()
-        console.log(searchId)
-        fetch(`http://localhost:8081/candidatos/id/${searchId}`, { 
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
-            .then((response) => response.json())
-            .then((data) => {
-            // Aquí puedes hacer algo con la respuesta del servidor si lo deseas
-            const arrayData = Array.isArray(data) ? data : [data]
+        try{
+            const response = await axios.get(`http://localhost:8080/api/candidatos/id/${searchId}`,{withCredentials: true})
+            const arrayData = Array.isArray(response) ? response : [response]
             console.log(arrayData)
-            arrayData[0] !== null ? setData(arrayData) : setData(data)
-            console.log('Respuesta del servidor:', data);
-            })
-            .catch((error) => {
-            console.error('Error al enviar los datos:', error);
-            });
+            arrayData[0] !== null ? setData(arrayData) : setData(response)
+            console.log('Respuesta del servidor:', response);
+            
+        } catch(error){
+            console.log('Error al enviar los datos:', error)
+        };
      }
     
 
@@ -140,7 +140,7 @@ export const Candidatos = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {Array.isArray(data) ?
+                        {Array?.isArray(data) ?
 
                         data.map((item) =>( 
                             item.activo &&

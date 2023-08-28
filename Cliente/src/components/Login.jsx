@@ -1,16 +1,16 @@
-import React, {useState, useEffect, createContext} from 'react'
+import React, {useState, useEffect} from 'react'
 import '../styles/login.css'
 import { NavLink, useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export const Login = () => {
     const [verif, setVerif] = useState(false) 
     const [data, setData] = useState('')
     const [loginData, setLoginData] = useState({
             email: '',
-            password: ''
+            contraseña: ''
         })
-    
-    const UserContext = createContext();
+
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -32,50 +32,24 @@ export const Login = () => {
         e.preventDefault();
 
         try{
-            const response = await fetch(`http://localhost:8081/usuario/verify-email/${loginData.email}`);
-            const responseData = await response.json();
-            setData(responseData);
-            if (loginData.email === responseData.email && loginData.password === responseData.contraseña) {
-                console.log('Usuario encontrado');
+            const response = await axios.post(`http://localhost:8080/api/user/login`,
+                loginData, {withCredentials: true}
+            );
+            console.log(response)
+            if(response.data.message === 'Inicio de sesion exitoso' && response.status === 200){
+                console.log('Usuario encontrado', 'Validacion Ok!');
                 setVerif(true);
-            } else {
-                console.log('Usuario no encontrado');
-                setVerif(false);
             }
+           
         } catch (error){
             console.error('Error al obtener los datos:', error);
         }
-       /* fetch(`http://localhost:8081/usuario/verify-email/${loginData.email}`)
-        .then((response) => response.json())
-        .then(response => setData(response))
-        .catch(error => {
-            console.error('Error al obtener los datos:', error);
-        })
-        if(loginData.email === data.email && loginData.password === data.contraseña){
-            console.log('encontrado')
-            setVerif(true)          
-        } else {
-        alert('Usuario no encontrado')
-        setVerif(false)        
-        }
-        //verifyUser()*/
     }
-
-    const verifyUser = () => {
-        if(loginData.email === data.email && loginData.password === data.contraseña){
-            console.log('encontrado')
-            setVerif(true)          
-        } else {
-        alert('Usuario no encontrado')
-        setVerif(false)        
-        }
-    }
-
 
   return (
     <div className='container-login'>
-        <img className='img-ar' src='/img/img_logos_arcons/ar-it-service-logo-01.png' alt='logoarcons'/>
-        <div className='form-container'>
+        <img className='img-ar' src='/img/img_logos_arcons/1.png' alt='logoarcons'/>
+        <div className='form-container-login'>
             <form action="submit" onSubmit={handleLogin}>
                 <div className='iniSes-container'>Iniciar sesion</div>
                 <div className='email-container'>
@@ -90,17 +64,17 @@ export const Login = () => {
                         placeholder='Ingresa tu mail...' />
                 </div>
                 <div className='password-container'>
-                    <label htmlFor="password">Contraseña</label>
+                    <label htmlFor="contraseña">Contraseña</label>
                     <input
                      type='password' 
-                     id='password' 
-                     name='password'
-                     value={loginData.password}
+                     id='contraseña' 
+                     name='contraseña'
+                     value={loginData.contraseña}
                      onChange={handleChange} 
                      required
                      placeholder='Ingresa tu contraseña'/>
                 </div>
-                <button type="submit" className='iniSes-btn' >INICIAR SESION</button>
+                <button type="submit" className='login-btn' >INICIAR SESION</button>
                 <NavLink><button type="" className='forgetpsw-btn' >OLVIDASTE TU CONTRASEÑA</button></NavLink>
             </form>
         </div>

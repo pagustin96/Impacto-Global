@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect } from 'react'
+import axios from 'axios'
 import '../styles/reclutamiento.css'
 import { Vacantes } from './Vacantes'
 import { ModalVacante } from './ModalVacante'
@@ -33,14 +34,16 @@ const handleSearchBttn = (event) => {
 }
 }
 
-const handleAll = () => {
+const handleAll = async() => {
   console.log('handleAll')
-  fetch(`http://localhost:8081/vacantes/all`)
-  .then((response) => response.json())
-  .then(response => setData(response))
-  .catch(error => {
+    try{
+      const response = await axios.get(`http://localhost:8080/api/vacantes`,
+          {withCredentials: true}
+      );
+      setData(response.data)
+    } catch (error){
       console.error('Error al obtener los datos:', error);
-  })  
+    }
 }
 
 const handleSearch =() => {

@@ -17,3 +17,14 @@
     font-size: 25px;
     font-weight: 700;
 }
+
+.cerrar-sesion-btn{
+    width: 100px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+}
+
+.cerrar-sesion-btn:hover{
+    background-color: red;
+    color: white
+}

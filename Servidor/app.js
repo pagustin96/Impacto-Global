@@ -4,10 +4,15 @@ require ('./src/config')
 const apiRouter = require('./src/routes/api')
 const cors = require('cors')
 const app = express()
+const cookieParser = require('cookie-parser')
 
 app.use(bodyParser.json())
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({ extended: true}))
-app.use(cors())
+app.use(cors({
+  origin: 'http://localhost:3000',
+  credentials: true
+}))
 app.use('/api', apiRouter)
 
 const PORT = process.env.port || 8080

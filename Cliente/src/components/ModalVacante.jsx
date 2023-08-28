@@ -1,5 +1,7 @@
 import React from 'react'
 import { useEffect , useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import axios from 'axios'
 
 export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedCandidate, modificar, setModificar}) => {
 
@@ -11,12 +13,13 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
         skills: '',
         cantidad:'',
         comienzo:'',
-        ningles: '',
+        ingles: '',
         rate:'',
         estado:'',
         cierre:'',
       })
     
+    const navigate = useNavigate();
 
     useEffect(()=>{
         if (selectedCandidate) {
@@ -29,12 +32,13 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
               skills: selectedCandidate.skills || '',
               cantidad: selectedCandidate.cantidad || '',
               comienzo: selectedCandidate.comienzo || '',
-              ningles: selectedCandidate.ningles || '',
+              ingles: selectedCandidate.ingles || '',
               rate: selectedCandidate.rate || '',
               estado: selectedCandidate.estado || '',
               cierre: selectedCandidate.cierre || ''
             });
           }
+          handleToken()
     },[selectedCandidate])
 
     const cleanState = () =>{
@@ -48,13 +52,21 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
         skills: '',
         cantidad:'',
         comienzo:'',
-        ningles: '',
+        ingles: '',
         rate:'',
         estado:'',
         cierre:''
       })
       setSelectedCandidate(null)
     }
+
+    const handleToken = () => {
+       
+      if(formData && formData.error === 'Necesitas incluir el access_token en la cookie'){
+          alert('SU SESION A EXPIRADO!')
+          navigate('/login')
+      }
+  } 
 
     const handleChange = (event) => {
         const { name, value } = event.target;
@@ -74,29 +86,18 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
         }
     }
 
-    const handleSubmit = (event) => {
+    const { id, ...formDataWithoutId } = formData;
+    const handleSubmit = async (event) => {
         event.preventDefault();
-        // Aquí puedes enviar los datos del formulario a través de una llamada a la API o hacer lo que necesites con ellos.
-        // Realizar la solicitud POST con fetch
-    fetch('http://localhost:8081/vacantes/add', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          // Aquí puedes hacer algo con la respuesta del servidor si lo deseas
-          if(data.status === 500){
-            alert("El email ya esta registrado!!")
-          }
-          console.log('Respuesta del servidor:', data);
-        })
-        .catch((error) => {
+        try{
+          const response = await axios.post(`http://localhost:8080/api/vacantes/add`,
+              formDataWithoutId, {withCredentials: true}
+          );
+          console.log(response)         
+        } catch (error){
           console.error('Error al enviar los datos:', error);
-        });
-        console.log(formData);
+        }
+
         // Limpia el formulario después del envío
         
         setFormData({
@@ -107,7 +108,7 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
             skills: '',
             cantidad:'',
             comienzo:'',
-            ningles: '',
+            ingles: '',
             rate:'',
             estado:'',
             cierre:''
@@ -141,7 +142,7 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
             skills: '',
             cantidad:'',
             comienzo:'',
-            ningles: '',
+            ingles: '',
             rate:'',
             estado:'',
             cierre:''
@@ -223,9 +224,9 @@ export const ModalVacante = ({estado, setEstado, selectedCandidate, setSelectedC
                         <input
                         placeholder='Ingles...'
                           type="text"
-                          id="ningles"
-                          name="ningles"
-                          value={formData.ningles}
+                          id="ingles"
+                          name="ingles"
+                          value={formData.ingles}
                           onChange={handleChange}
                           required
                           />

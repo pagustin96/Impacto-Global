@@ -6,7 +6,7 @@ export const Inicio = () => {
   return (
     <div className='container-inicio'>
         
-        <img className='img-ar' src='/img/img_logos_arcons/ar-it-service-logo-01.png' alt='logoarcons'/>
+        <img className='img-ar' src='/img/img_logos_arcons/1.png' alt='logoarcons'/>
         
         <div className='btn-container'>
             <div className='btn-reg-container'><button className='btn-registrarse'><Link to={'/register'} className='link-btn2'>REGISTRARSE</Link></button></div>
