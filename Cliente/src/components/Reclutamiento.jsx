@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react'
 import axios from 'axios'
 import '../styles/reclutamiento.css'
 import { Vacantes } from './Vacantes'
-import { ModalVacante } from './ModalVacante'
+import { NavLink } from 'react-router-dom'
+
 
 export const Reclutamiento = () => {
 
@@ -11,11 +12,11 @@ export const Reclutamiento = () => {
   const [selectedCandidate, setSelectedCandidate] = useState(null)
   const [modificar, setModificar] = useState(false)
   const [searchName, setSearchName] = useState('')
-  const [data, setData] = useState('')
+  const [dataFilter, setDataFilter] = useState({filter: false, data: ''})
+  
+  useEffect(()=>{
     
-useEffect(()=>{
-  handleAll()
-},[])
+  },[])
 
 const handleChange = (event) => {
   event.preventDefault()
@@ -23,84 +24,80 @@ const handleChange = (event) => {
   setSearchName(value);
 }
 
-const handleSearchBttn = (event) => {
+const handleSearchBttn = (event) => { /*
   event.preventDefault()
   if(searchName !== ''){
     event.preventDefault()
     handleSearch()
 } else {
     event.preventDefault()
-    handleAll()
-}
+    //handleAll()
+}*/
 }
 
-const handleAll = async() => {
-  console.log('handleAll')
-    try{
-      const response = await axios.get(`http://localhost:8080/api/vacantes`,
-          {withCredentials: true}
-      );
-      setData(response.data)
-    } catch (error){
-      console.error('Error al obtener los datos:', error);
-    }
-}
+
 
 const handleSearch =() => {
-          fetch(`http://localhost:8081/vacantes/nombre/${searchName}`, { 
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-    }
-  })
-      .then((response) => response.json())
-      .then((data) => {
-      // Aquí puedes hacer algo con la respuesta del servidor si lo deseas
-      if(data.status === 500){
-        setData('')
-      } else {
-        const arrayData = Array.isArray(data) ? data : [data]
-        console.log(arrayData)
-        arrayData[0] !== null ? setData(arrayData) : setData(data)
-      }
-      console.log('Respuesta del servidor:', data);
-      })
-      .catch((error) => {
-      console.error('Error al enviar los datos:', error);
-      })
-      setSearchName('')      
+ /* console.log('data.data: ', data)
+  if(searchName === ''){
+    setDataFilter({filter: false, data: ''})
+    return
+}
+  const array = data.filter((object) => object.nombre?.toLowerCase().includes(searchName) || 
+        object.seniority?.toLowerCase().includes(searchName) || object.id?.toString().includes(searchName))
+  setDataFilter({filter: true, data: array})
+  console.log(dataFilter)*/
+        
 }
 
 return (
     <div className='recl-cont'>
       <div className='reclutamiento-container'>
-        <div className='vacantes-container'>
-          <form action="submit" onSubmit={handleSearchBttn}> 
-            <label htmlFor="vacantes"><h2>Vacantes Abiertas</h2></label>
+        <div className='titulo-input-container'>
+        <div className='vacantesabiertas'><h2>VACANTES ABIERTAS</h2></div>
+          <form action="submit" className='reclutaminetolabel' onSubmit={handleSearchBttn}> 
             <input 
             type="text" 
             name="vacantes" 
             id="vacantes" 
+            placeholder='Empresa...'
             value={searchName}
             onChange={handleChange}
             />
-            <button type='submit'>Buscar</button>
+            <svg class="iconcandidatos" aria-hidden="true" viewBox="0 0 24 24"><g><path d="M21.53 20.47l-3.66-3.66C19.195 15.24 20 13.214 20 11c0-4.97-4.03-9-9-9s-9 4.03-9 9 4.03 9 9 9c2.215 0 4.24-.804 5.808-2.13l3.66 3.66c.147.146.34.22.53.22s.385-.073.53-.22c.295-.293.295-.767.002-1.06zM3.5 11c0-4.135 3.365-7.5 7.5-7.5s7.5 3.365 7.5 7.5-3.365 7.5-7.5 7.5-7.5-3.365-7.5-7.5z"></path></g></svg>
+            
           </form>
         </div>
       </div>
       <div className='addNew-container'>
-        <button className='add-new-candidato' onClick={()=> setEstado(true)}>+ Agregar</button>
+
       </div>
+      {searchName === '' ? <div className='todasempresas-container'>
+        <div className='ticket'>
+          <NavLink to={`/vacante-list/all/allVacantes`}><div className='card-container-todasempresas' >
+              <div className='card-img-container-todasempresas'>
+                  <img className='card-img' src= {`/img/img_vacantes/todasempresas.png`} alt='claroimg' />    
+              </div>
+              <div className='info-card-container' >
+                  <div className='empresa-card'>
+                
+                  </div>
+              
+              </div>
+          </div></NavLink>
+        </div>
+
+      </div> : <div></div>}
+
       <div className='multiple-card-container'>
         <Vacantes setSelectedCandidate={setSelectedCandidate} 
         setEstado={setEstado} 
         setModificar={setModificar} 
         searchName={searchName} 
         setSearchName={setSearchName}
-        data={data} />
+        dataFilter={dataFilter} 
+     />
 
-        <ModalVacante estado={estado} setEstado={setEstado} selectedCandidate={selectedCandidate} setSelectedCandidate={setSelectedCandidate} 
-        modificar={modificar} setModificar={setModificar} />
       </div>
       
     </div>

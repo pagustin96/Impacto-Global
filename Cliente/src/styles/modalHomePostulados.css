@@ -1,0 +1,30 @@
+.modal-postulaciones-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 700px;
+    height: 600px;
+    overflow: auto;
+    margin-bottom: 100px;
+    background-color: #fff;
+    position: relative;
+    border-radius: 5px;
+    box-shadow: rgba(100, 100, 111, 0.2) 8px 7px 29px 0px;
+    padding: 20px;
+}
+
+.encabezado-modal-postulados{
+    display: flex;
+    align-items: top;
+    justify-content: center;
+    margin-left: 225px;
+    margin-bottom: 20px;
+    border-bottom: 1px solid #E8E8E8;
+}
+
+.modal-datos-postulados {
+    font-weight: 900;
+    margin: 10px;
+    margin-left: 125px;
+}

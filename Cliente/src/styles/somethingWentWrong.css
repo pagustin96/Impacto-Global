@@ -1,0 +1,35 @@
+.error-component {
+    text-align: center;
+    padding: 20px;
+    font-family: Arial, sans-serif;
+    background-color: #f8d7da; /* Color de fondo rojo claro, puedes personalizarlo */
+    color: #721c24; /* Color de texto rojo oscuro, puedes personalizarlo */
+    border: 1px solid #f5c6cb; /* Borde rojo claro, puedes personalizarlo */
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .falling-r {
+    font-size: 36px;
+    transform-origin: center;
+    animation: rotateAndBounce 2s ease-in-out forwards;
+  }
+  
+  @keyframes rotateAndBounce {
+    0% {
+      transform: rotate(0deg) translateY(-100px); /* Comienza arriba y sin rotación */
+    }
+    25% {
+      transform: rotate(90deg) translateY(0); /* Rota 90 grados a la derecha */
+    }
+    50% {
+      transform: rotate(0deg) translateY(100px); /* Vuelve a rotar a 0 grados y cae */
+    }
+    75% {
+      transform: rotate(0deg) translateY(50px); /* Leve rebote */
+    }
+    100% {
+      transform: rotate(0deg) translateY(0); /* Llega al piso */
+    }
+  }
+  

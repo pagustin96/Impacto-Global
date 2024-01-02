@@ -1,24 +1,104 @@
+body{
+  background-color: white;
+}
+
 .candidatos-container{
     display: flex;
     flex-flow: column;
+    height: 90vh;
+    align-items: center;
+    overflow-x: hidden;
+    margin-bottom: 30px;
 }
 
 .candidatos-table-container{
     display: flex;
     margin: 2% 10% 5px 10%;
-    align-items: center;
+    align-items: start;
     justify-content: center;
+    height: 100vw;
+    width: 100vw;
+    margin-bottom: 40px;
+    padding-top: 0px;
 }
 
-/* Estilos generales para la tabla */
-table {
-    width: 100%;
+.candidatos-table-container table{
+  margin-bottom: 30px;
+}
+
+.candidatos-label-titulo{
+  color: black;
+}
+
+.candidatoslabel{
+  display: flex;
+  align-items: center;
+  position: relative;
+  width: 500px;
+  max-width:500px;
+  line-height: 28px;
+  margin: 0px auto;
+}
+
+.candidatoslabel input{
+  font-family: '../fonts/arfont.ttf';
+  width: 100%;
+  height: 40px;
+  line-height: 28px;
+  padding: 0 1rem;
+  padding-left: 2.5rem;
+  border: 2px solid transparent;
+  border-radius: 8px;
+  outline: none;
+  background-color: #f3f3f4;
+  color: #0d0c22;
+  transition: .3s ease;
+
+}
+
+input::placeholder {
+  color: #9e9ea7;
+}
+
+.candidatoslabel input:focus, .candidatoslabel input:hover {
+  outline: none;
+  border-color: #C22129;
+  background-color: #fff;
+  box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.iconreclutamiento {
+  position: absolute;
+  left: 1rem;
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
+}
+
+.candidatostext h2{
+  display: flex;
+  justify-content: center;
+  font-family:'../fonts/arfont.ttf';
+  font-size: 40px;
+  font-weight: 900;
+  padding-top: 0px;
+}
+
+.iconcandidatos {
+  position: absolute;
+  left: 1rem;
+  fill: #9e9ea7;
+  width: 1rem;
+  height: 1rem;
+}
+
+.candidatos-table-container table {
+    width: 90vw;
     border-collapse: collapse; /* Fusiona los bordes de las celdas */
     margin-top: 20px;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
   }
   
-  /* Estilos para las celdas del encabezado de la tabla */
   th {
     
     padding: 10px;
@@ -36,43 +116,40 @@ table {
     background-color: #f2f2f2;
   }
   
-  /* Estilos para los botones dentro de las celdas de la tabla */
-  td button {
-    padding: 5px 10px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-    margin-right: 5px;
-    width: 100px;
-  }
-  
   /* Estilos para los botones "MODIFICAR" y "ELIMINAR" */
   button.modify {
-    background-color: #17a2b8;
+    background-color: white;
+    color: black;
     border-radius: 5px;
-    transition: .3s ease all;
+    width: 30px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombras (horizontal, vertical, desenfoque, color) */
+    transition: box-shadow 0.1s ease;
+    cursor: pointer;
   }
 
   button.modify:hover{
-    background-color: #007bff
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
   }
   
   button.delete {
     background-color: #dc3545;
+    color: white;
     border-radius: 5px;
-    transition: .3s ease all;
+    transition: 0.1s ease all;
+    width: 30px;
+    cursor: pointer;
   }
 
   button.delete:hover{
     background-color: red;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
   }
   
   .add-new-candidato{
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: .3s ease all;
+    transition: 0.1s ease all;
     background-color: #dc3545;
     cursor: pointer;
     color: white;
@@ -85,36 +162,98 @@ table {
   }
 
   .add-new-candidato:hover{
-    background-color: red
+    background-color: red;
+    box-shadow: 4px 4px 6px rgba(0, 0, 0, 0.3);
   }
 
   .addNew-container{
     display: flex;
     align-items: center;
     justify-content: center;
+    margin-top: 20px;
   }
 
-  .busqueda-container{
-    margin-left: 10%;
-    margin-right: 10%;
+
+  td .acciones-header{
     display: flex;
-    justify-content: center;
   }
 
-  .busqueda-container label{
-    font-weight: 700;
-    margin-right: 5px;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  }
+.link-linkedin{
+  text-decoration: none;
+  color: black;
+}
 
-  .busqueda-container button{
-    width: 100px;
-    background-color: #17a2b8;
-    color: white;
-    transition: .3s ease all;
-    border-radius: 5px;
-  }
+.link-linkedin:hover{
+  color: red;
+}
 
-  .busqueda-container button:hover{
-    background-color: #007bff
-  }
+.pdf-container{
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-right: 600px;
+}
+
+.pdf-container .agregar{
+  right: 1;
+}
+.agregar{
+  position: relative;
+  width: 170px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  border: 1px solid #C22129;
+  background-color: #C22129;
+}
+
+.agregar, .buttonagregar, .buttonmas {
+  transition: all 0.3s;
+}
+
+.agregar .buttonagregar {
+  transform: translateX(30px);
+  color: #fff;
+  font-weight: 600;
+}
+
+.agregar .buttonmas {
+  position: absolute;
+  transform: translateX(100px);
+  height: 100%;
+  width: 25px;
+  background-color: #C22129;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  fill: white;
+}
+
+.agregar .svg {
+  width: 25px;
+  stroke: #fff;
+  fill: white;
+}
+
+.agregar:hover {
+  background: #C22129;
+}
+
+.agregar:hover .buttonagregar {
+  color: transparent;
+}
+
+.agregar:hover .buttonmas {
+  width: 148px;
+  transform: translateX(0);
+}
+
+.agregar:active .buttonmas {
+  background-color: #C22129;
+}
+
+.agregar:active {
+  border: 1px solid #C22129;
+}

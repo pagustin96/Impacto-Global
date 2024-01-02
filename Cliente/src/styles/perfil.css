@@ -1,4 +1,5 @@
 .perfil-container{
+    position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -18,13 +19,162 @@
     font-weight: 700;
 }
 
-.cerrar-sesion-btn{
-    width: 100px;
+.perfil-email{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.cerrar-sesion-btn {
+    --black: #000000;
+    --ch-black: #141414;
+    --eer-black: #1b1b1b;
+    --night-rider: #2e2e2e;
+    --white: #ffffff;
+    --af-white: #f3f3f3;
+    --ch-white: #e1e1e1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 45px;
+    height: 45px;
+    border: none;
     border-radius: 5px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    transition-duration: .3s;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.199);
+    background-color: var(--night-rider);
+    margin-top: 20px;
+}
+
+
+.sign {
+    width: 100%;
+    transition-duration: .3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sign svg {
+    width: 17px;
+}
+
+.sign svg path {
+    fill: var(--af-white);
+}
+  /* text */
+.textocerrar {
+    position: absolute;
+    left: 30%;
+    width: 0%;
+    opacity: 0;
+    color: var(--af-white);
+    font-size: 15px;
+    font-weight: 600;
+    transition-duration: .3s;
+}
+  /* hover effect on button width */
+.cerrar-sesion-btn:hover {
+    width: 125px;
+    border-radius: 5px;
+    transition-duration: .3s;
+}
+
+.cerrar-sesion-btn:hover .sign {
+    width: 30%;
+    transition-duration: .3s;
+    padding-left: 10px;
+}
+
+.cerrar-sesion-btn:hover .textocerrar {
+    opacity: 1;
+    width: 70%;
+    transition-duration: .3s;
+    padding-right: 10px;
+}
+
+.cerrar-sesion-btn:active {
+    transform: translate(2px ,2px);
 }
 
 .cerrar-sesion-btn:hover{
-    background-color: red;
+    background-color: #c22129;
     color: white
 }
+
+.overlay-loader{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.cuenta-container{
+    border: 1px solid #e0e0e0; /* Ancho del borde, estilo y color */
+    padding: 10px;
+    display: flex;
+    width: 500px;
+}
+
+.cuenta-valor-container{
+    width: 450px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+    
+    
+}
+
+.cuenta-container button{
+    background-color: white;
+    font-weight: 400;
+    font-size: 16px;
+    padding: 0px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.cuenta-btn-container{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+.cuenta-btn-container button{
+    color: black;
+}
+
+.circulo-container-perfil{
+    display: flex;
+    flex: 1;
+    justify-content: flex-end;
+    align-items: center;
+    margin-right: 20px;   
+}
+
+.circulo-container-perfil p {
+    margin-right: 25px;
+    font-weight: 500;
+}
+
+.circulo-perfil-perfil {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+/* ----------------*/
+
+

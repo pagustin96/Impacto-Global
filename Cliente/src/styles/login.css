@@ -1,67 +1,112 @@
+body {
+    overflow-y: hidden;
+}
+
 .container-login{
+    position: relative;
     background-color: black;
     height: 140vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: '../fonts/arfont.ttf';
+}
+
+.texto2 {
+    margin-top: -15px;
+    margin-bottom: 20px;
+    color: white;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+.group2 {
+    position: relative;
+    margin-top: 25px;
 }
 
 
-.form-container{
-   /* background-color: white;*/
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.form-container-login form{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: white;
-    border-radius: 15px;
-    width: 450px;
-    height: 360px;
-}
-
-.iniSes-container{
-    color: rgb(241, 8, 13);
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    font-size: 24px;
-    font-weight: 700;
-    min-height: 29px;
-    margin-top: 20px;
-}
-
-form input {
-    border-radius: 4.5px;
-    border-color: rgb(221, 221, 221);
+.second-input {
     font-size: 16px;
-    height: 30px;
-    width: 276px;
+    padding: 10px 10px 10px 5px;
+    display: block;
+    width: 185px;
+    border: none;
+    border-bottom: 1px solid #6c6c6c;
+    background: transparent;
+    color: #ffffff;
+}
+
+.second-input:focus {
     outline: none;
-    padding-left: 10px;
-    padding-right: 10px;
+    border-bottom-color: #C22129;
 }
 
-.email-container {
-    display: flex;
-    flex-direction: column;
-    margin-top: 15px;
+
+.lebal-email2 {
+    color: #999999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 5px;
+    top: 10px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
 }
 
-.password-container{
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+.second-input:focus ~ .lebal-email2,
+.second-input:valid ~ .lebal-email2 {
+    top: -20px;
+    font-size: 14px;
+    color: #C22129;
 }
 
-form label{
-    color: black;
+.highlight-span {
+    position: absolute;
+    height: 60%;
+    width: 0px;
+    top: 25%;
+    left: 0;
+    pointer-events: none;
+    opacity: 0.5;
 }
+
+.second-input:focus ~ .highlight-span {
+    -webkit-animation: input-focus 0.3s ease;
+    animation: input-focus 0.3s ease;
+}
+
+
+@keyframes input-focus {
+    from {
+    background: #C22129;
+    }
+
+    to {
+    width: 185px;
+    }
+}
+
+.lebal-email3 {
+    color: #999999;
+    font-size: 18px;
+    font-weight: normal;
+    position: absolute;
+    pointer-events: none;
+    left: 115px;
+    top: 150px;
+    transition: 0.2s ease all;
+    -moz-transition: 0.2s ease all;
+    -webkit-transition: 0.2s ease all;
+}
+
+
 
 button{
+    color: whitesmoke;
+    background-color: #676765;
     width: 300px;
     height: 35px;
     font-size: 14px;
@@ -74,21 +119,93 @@ button{
 }
 
 .login-btn {
-    background-color: rgb(241, 8, 13);
-    color: white;
-    height: 35px;
-    transition: 0.5s ease-in all;
-    cursor: pointer;
-    margin-top: 30px;
+    margin-top: 40px;
+    color: whitesmoke;
+    background-color: #676765;
+    width: 18em;
+    height: 3em;
+    font-size: 18px;
+    font-family: inherit;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
 }
 
-.login-btn:hover {
-    color: black;
+.login-btn::before {
+    content: '';
+    width: 0;
+    height: 3em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #CE5151 0%, #C22129 100%);
+    transition: .8s ease;
+    display: block;
+    z-index: -1;
+}
+
+.login-btn:hover::before {
+    width: 18em;
 }
 
 
 .forgetpsw-btn{
-    background-color: rgb(241, 8, 13);
-    color: white;
+    color: whitesmoke;
+    background-color: #676765;
     cursor: pointer;
+    width: 18em;
+    height: 3em;
+    font-size: 18px;
+    font-family: inherit;
+    border: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.forgetpsw-btn::before {
+    content: '';
+    width: 0;
+    height: 3em;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: linear-gradient(to right, #CE5151 0%, #C22129 100%);
+    transition: .8s ease;
+    display: block;
+    z-index: -1;
+}
+
+.forgetpsw-btn:hover::before {
+    width: 18em;
+}
+
+.load-container{
+    display: flex;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: center;
+}
+
+.overlay-loader{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0,0,0,0.5);
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.imglogin{
+    margin-bottom: 30px;
+    margin-top: 20px;
+    height: 250px;
+    width: 350px;
 }

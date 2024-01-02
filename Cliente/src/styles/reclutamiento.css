@@ -1,60 +1,198 @@
+.recl-cont{
+    height: 100vh;
+    overflow: scroll;
+}
+
 .reclutamiento-container{
     display: flex;
     justify-content: center;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: '../fonts/arfont.ttf';
 }
 
-.vacantes-container{
+.reclutamiento-label-titulo{
+    color: black;
+}
+
+.vacantesabiertas h2{
+        display: flex;
+        justify-content: center;
+        font-family:'../fonts/arfont.ttf';
+        font-size: 40px;
+        font-weight: 900;
+        padding-top: 0px;
+}
+
+.titulo-input-container{
     display: flex;
     flex-direction: column;
-    position: relative;
     justify-content: center;
     align-items: center;
 }
 
-.vacantes-container h2{
-    text-align: center;
-    margin-top: 15px;
-    font-size: 40px;
-    font-weight: 900;
-}
-
-.vacantes-container input{
+.titulo-input-container input{
     padding-left: 15px;
     padding-right: 70px;
     border-radius: 5px;
     height: 35px;
     width: 485px;
     /*valores del input*/
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    font-family: '../fonts/arfont.ttf';
     font-size: 18px;
     font-weight: 500;
+    margin: 0px;
 
-}
-
-.vacantes-container button{
-    margin: 0px 20px 0px 0px;
-    padding: 0;
-    width: 50px;
-    height: 41px;
-    position: absolute;
-    bottom: 0;
-    right: 0;
-    background-color: transparent;
-    border: none;
-    cursor: pointer;
-    transition: 0.5s ease all;
-}
-
-.vacantes-container button:hover{
-    color: red;
-    font-size: 15px;
 }
 
 .multiple-card-container{
-    margin: 40px;
+    margin: 10px 0px 50px;
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
 
+.reclutaminetolabel{
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 600px;
+    max-width:600px;
+    line-height: 28px;
+    margin: 10px auto;
+}
+
+.reclutaminetolabel input{
+    width: 100%;
+    height: 40px;
+    line-height: 28px;
+    padding: 0 1rem;
+    padding-left: 2.5rem;
+    border: 2px solid transparent;
+    border-radius: 8px;
+    outline: none;
+    background-color: #f3f3f4;
+    color: #0d0c22;
+    transition: .3s ease;
+}
+
+input::placeholder {
+    color: #9e9ea7;
+}
+
+.reclutaminetolabel input:focus, .reclutaminetolabel input:hover {
+    outline: none;
+    border-color: #C22129;
+    background-color: #fff;
+    box-shadow: 0 0 0 4px rgb(234 76 137 / 10%);
+}
+
+.iconreclutamiento {
+    position: absolute;
+    left: 1rem;
+    fill: #9e9ea7;
+    width: 1rem;
+    height: 1rem;
+}
+
+.agregar-reclu{
+    padding-right: 100px;
+    position: relative;
+    width: 135px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #C22129;
+    background-color: #C22129;
+}
+
+.agregar-reclu, .buttonagregar-reclu, .buttonmas-reclu {
+    transition: all 0.3s;
+}
+
+.agregar-reclu .buttonagregar-reclu {
+    transform: translateX(30px);
+    color: #fff;
+    font-weight: 600;
+}
+
+.agregar-reclu .buttonmas-reclu {
+    position: absolute;
+    transform: translateX(100px);
+    height: 100%;
+    width: 25px;
+    background-color: #C22129;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    fill: white;
+}
+
+.agregar-reclu .svg {
+    width: 25px;
+    stroke: #fff;
+    fill: white;
+}
+
+.agregar-reclu:hover {
+    background: #C22129;
+}
+
+.agregar-reclu:hover .buttonagregar-reclu {
+    color: transparent;
+}
+
+.agregar-reclu:hover .buttonmas-reclu {
+    width: 112px;
+    transform: translateX(0);
+}
+
+.agregar-reclu:active .buttonmas-reclu {
+    background-color: #C22129;
+}
+
+.agregar-reclu:active {
+    border: 1px solid #C22129;
+}
+
+.todasempresas-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    position: relative;
+    perspective: 1000px;
+}
+
+.card-container-todasempresas{
+    z-index: 990;
+    
+    background-color: #f0f0f0;
+    width: 550px;
+    height: 250px;
+    border: 1px solid #F0F0F0;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 10px 10px 5px rgba(0, 0, 0, 0.1);
+    
+    
+}
+
+.card-img-container-todasempresas{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color:  #F0F0F0;
+    border-radius: 20px 20px 0px 0px;
+   
+}
+
+.card-container-todasempresas .card-img{
+    margin-top: 20px;
+    width: 500px;
+    height: 170px;
 }

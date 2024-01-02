@@ -1,73 +1,85 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import '../styles/vacantes.css'
+import axios from 'axios'
+import { VacanteLista } from './VacanteLista'
+import { NavLink } from 'react-router-dom'
 
-export const Vacantes = ({setSelectedCandidate, setEstado, setModificar, data}) => {
 
-    useEffect(() => { 
+export const Vacantes = ({searchName, setSearchName, setSelectedCandidate, setEstado, setModificar, dataFilter}) => {
+    const [data, setData] = useState()
+    
+    
+         useEffect(() => { 
 
-    }, [data])
+            handleAll(searchName)
+            
+    }, [searchName])
   
+    const handleAll = async(search) => {
+        console.log('handleAll')
+          try{
+            const clientes = await axios.get(`http://localhost:8081/function/clientes`,
+            {withCredentials: true})
+            if(search !== ''){
+                const newArr = clientes.data.filter((obj) => obj[1].toLowerCase().includes(search))
+                setData(newArr)
+            } else {
+                setData(clientes.data)
+            }
+            
+      
+          } catch (error){
+            console.error('Error al obtener los datos: ', error);
+          }
+      }
+
     const modificarCandidato= (item)=> {
         setSelectedCandidate(item)
         setEstado(true)
         setModificar(true)
     }
 
-    const handleDelete = (id) =>{
+    const handleDelete = async(id) =>{
+        console.log('idddddddddd:', id)
+        const check = window.confirm("Deseas eleminar al candidato?")
         
-        fetch(`http://localhost:8081/vacantes/delete/${id}`, { //cambiar id por nombre
-          method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json',
-          }
-        })
-          .then((data) => {
-            // Aquí puedes hacer algo con la respuesta del servidor si lo deseas
-            console.log('Respuesta del servidor:', data);
-          })
-          .catch((error) => {
-            console.error('Error al enviar los datos:', error);
-          });
-          //setDeleteUser(true)
+        if(check){
+            try {
+                const response = await axios.put(`http://localhost:8081/vacantes/cancelar/${id}`, 
+                {withCredentials: true})
+                console.log('Respuesta del servidor:', response);
+              }
+              catch(error){
+                console.error('Error al enviar los datos:', error);
+              }
+        }
+         
+        
       }
-      console.log(data)
+ 
   return (
     <>
 
-        {Array.isArray(data) ? 
-        data.map((data) => 
-        ( data.activo && 
-          
-        <div className='card-container' key={data.id}>
+        {data?.length > 0 ? 
+            data?.map((data) => 
+        ( 
+        
+        <NavLink to={`/vacante-list/${data[0]}/${data[1]}`}> <div className='card-container' key={data[0]}>
             <div className='card-img-container'>
-                <img className='card-img' src= {`/img/img_vacantes/${data.empresa.toLowerCase()}.png`} alt='claroimg' />    
+                <img className='card-img' src= {`/img/img_vacantes/${data[1]}.png`} alt={`${data[1]}img`} />    
             </div>
             <div className='info-card-container' >
                 <div className='empresa-card'>
-                    {data.empresa.toUpperCase()}
-                    <div className='close-btn-card'>
-                        <button onClick={() => modificarCandidato(data)}>m</button>
-                        <button onClick={() => handleDelete(data.id)}>x</button>
-                    </div>
+                    <div className='identificador-card' onClick={() => modificarCandidato(data[0])}>{`${data[1]} ID# ${data[0]}`} </div>
                 </div>
-                <div className='identificador-card'>Identificador #{data.id} </div>
-                
-                <div>Vacante: {data.nombre} </div>
-                <div>Seniority: {data.seniority} </div>
-                <div>Skills: {data.skills} </div>
-                <div>Ingles: {data.ningles} </div>
-                <div>Cantidad de vacantes: {data.cantidad} </div>
-                <div>Rate: {data.rate} </div>
-                <div>Activo: {data.activo ? 'Si' : 'No'} </div>
-                <div>Comienzo: {data.comienzo} </div>
-                <div>Cierre: {data.cierre} </div>
+             
             </div>
-        </div>
-        )) : <p>No data available</p>
-        }
+        </div></NavLink>
+        )) 
+        : <p>No existe una empresa con ese nombre</p>}
 
 
-  
+        
     </>
   )
 }

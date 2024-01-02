@@ -1,0 +1,29 @@
+.form-modal-vacante{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.tede-wraper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.tede-wraper label{
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.tede-wraper input{
+    height: 25px;
+    width: 400px;
+}
+
+.tede-wraper select{
+    height: 29px;
+    width: 406px;
+    padding: 1px 2px;
+}

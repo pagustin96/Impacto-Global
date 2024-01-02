@@ -2,71 +2,126 @@ import React from 'react'
 import { useEffect, useState } from 'react'
 import '../styles/register.css'
 import { NavLink } from 'react-router-dom'
+import axios from 'axios'
+import BeatLoader from "react-spinners/BeatLoader";
 
 export const Register = () => {
+    const [loading, setLoading] = useState(false)
     const [loginData, setLoginData] = useState({
-        email:'',
-        contraseña:'',
-        nombre:'',
-        apellido:'',
+        usuario: { 
+            email:'',
+            pwd:''},
+        reclutadora: {
+            nombre:'',
+            apellido:''
+        }
     })
-    //const [data, setData] = useState('')
 
-    const getUser = async (e) => {
-        // Llamada a la API en localhost:8081
+    const registerUser = async (e) => {
         e.preventDefault()
+        setLoading(true)
+
         try{
-            const response = await fetch(`http://localhost:8080/api/user/register`,{ 
-                method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(loginData),
-              })
-            const responseData = await response.json();
-            console.log(responseData)
+            const response = await axios.post(`http://localhost:8081/register`, 
+            loginData);
+            console.log(response)
+            /*const successfull = document.getElementById('register-successfull-container')
+
+            const succesfullDiv = document.createElement('div')  
+            succesfullDiv.textContent = response.data.toString()
+            succesfullDiv.style.color = 'red'
+
+            successfull.appendChild(succesfullDiv);*/
+            setLoading(false)
+            /*setTimeout(()=>{
+                successfull.removeChild(succesfullDiv)
+            }, 3000)*/
         }
         catch(error){
-            console.error('Error al obtener los datos:', error);
+            setLoading(false)
+            console.error('Error al obtener los datos:', error.response.data);
+            /*const successfull = document.getElementById('register-successfull-container')
+
+            const succesfullDiv = document.createElement('div')  
+            succesfullDiv.textContent = error.response.data.toString()
+            succesfullDiv.style.color = 'red'
+
+            successfull.appendChild(succesfullDiv);
+            setTimeout(()=>{
+                successfull.removeChild(succesfullDiv)
+            }, 3000)*/
         }        
     }
 
     const handleChange = (event) => {
         const { name, value } = event.target;
-        setLoginData((prevLoginData) => ({
-          ...prevLoginData,
-          [name]: value,
-        }));
-    }
+      
+        if (name === "nombre" || name === "apellido") {
+          setLoginData((prevFormData) => ({
+            ...prevFormData,
+            reclutadora: {
+              ...prevFormData.reclutadora,
+              [name]: value,
+            },
+          }));
+        }else if ( name === 'email' || name === 'pwd'){
+          
+                setLoginData((prevFormData) => ({
+                    ...prevFormData,
+                    usuario: {
+                        ...prevFormData.usuario,
+                        [name]: value,
+                    }
+
+                }))
+        } else {
+          setLoginData((prevFormData) => ({
+            ...prevFormData,
+            [name]: value,
+          }));
+        }
+      };
 
     console.log(loginData)
 
-  return (
-    <div className='container-register'>
-        <img className='img-ar' src='/img/img_logos_arcons/1.png' alt='logoarcons'/>
-        <div className='form-container-register'>
-            <form action='submit' onSubmit={getUser}>
-                <div className='iniSes-container'>Registrarse</div>
-                <div className='email-container'>
-                    <label htmlFor="email">Email</label>
-                    <input type="email" id='email' name='email' placeholder='Ingresa tu mail...' required onChange={handleChange} value={loginData.email}/>
-                </div>
-                <div className='password-container'>
-                    <label htmlFor="password">Contraseña</label>
-                    <input type="password" id='contraseña' name='contraseña' placeholder='Ingresa tu contraseña' required onChange={handleChange} value={loginData.contraseña}/>
-                </div>
-                <div className='password-container'>
-                    <label htmlFor="name">Nombre</label>
-                    <input type="text" id='nombre' name='nombre' placeholder='Ingresa tu nombre...' required onChange={handleChange} value={loginData.nombre}/>
-                </div>
-                <div className='password-container'>
-                    <label htmlFor="apellido">Apellido</label>
-                    <input type="text" id='apellido' name='apellido' placeholder='Ingresa tu apellido...' required onChange={handleChange} value={loginData.apellido}/>
-                </div>
-                <button type="submit" className='register-btn'>REGISTRARSE</button>
-                <NavLink to={'/login'}><button type="submit" className='red-login-btn' >YA TIENES UNA CUENTA?</button></NavLink>
-            </form>
+    return (
+        <div className='container-register'>
+             {loading && <div className='overlay-loader'><BeatLoader color="red" size={17}/></div>}
+            <img className='imgregister' src='/img/img_logos_arcons/ar-it-service-logo-01.png' alt='logoarcons'/>
+            <div className='form-container-register'>
+            <form class="form" onSubmit={registerUser}>
+            <p>Registrarse</p>
+            <div class="group">
+            <input class="main-input" type="email" name='email' required onChange={handleChange} value={loginData.email}/>
+            <span class="highlight-span"></span>
+            <label class="lebal-email">Email</label>
+            </div>
+            <div class="container-1">
+            <div class="group">
+                <input class="main-input" type="password" name='pwd' required onChange={handleChange} value={loginData.pwd}/>
+                <span class="highlight-span"></span>
+                <label class="lebal-email">Contraseña</label>
+            </div>
         </div>
-    </div>
-  )
+        <div class="container-2">
+            <div class="group">
+                <input class="main-input" name='nombre' type="text" required onChange={handleChange} value={loginData.nombre}/>
+                <span class="highlight-span"></span>
+                <label class="lebal-email">Nombre</label>
+            </div>
+        </div>
+        <div class="container-2">
+            <div class="group">
+                <input class="main-input" type="text" name='apellido' required onChange={handleChange} value={loginData.apellido}/>
+                <span class="highlight-span"></span>
+                <label class="lebal-email">Apellido</label>
+            </div>
+        </div>
+        <button type="submit" className='register-btn' >REGISTRARSE</button>
+                    <NavLink to='/login'><button type="" className='red-login-btn' >¿YA TENES CUENTA?</button></NavLink>
+        </form>
+            </div>
+        </div>
+        
+    )
 }

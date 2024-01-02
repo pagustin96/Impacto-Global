@@ -28,7 +28,7 @@
 .form-modal{
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     overflow: auto;
 }
 
@@ -75,19 +75,17 @@
 }
 
 .modal-btn-add{
-    background-color: #17a2b8;
-    transition: 0.5s ease all;
+    background-color: red;
+    transition: 0.1s ease all;
     width: 100px;
     height: 50px;
     margin-left: 40%;
+    color: white;
+    cursor: pointer;
 }
 
 .modal-btn-add:hover{
-    background-color: #007bff;
-    color: #E8E8E8;
-    cursor: pointer;
-    width: 110px;
-    height: 55px;
+    color: black;
     box-shadow:  0px 5px 5px rgba(0, 0, 0, 0.3);
 }
 
@@ -111,4 +109,9 @@
 
 .tede-input input{
     width: 350px;
+}
+
+#vacantes-modal{
+    width: 406px;
+    height: 29px;
 }
